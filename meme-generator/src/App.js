@@ -3,10 +3,13 @@ import Meme from './components/Meme'
 
 
 function App() {
+  function test (){
+    console.log("working 2")
+  }
   return (
     <div className="App">
         <Header/>
-        <Meme/>
+        <Meme onClick={test} />
     </div>
   );
 }
