@@ -1,13 +1,12 @@
 import React from 'react'
-import testData from './memepage.json'
 
 const Meme = () => {
   
   const [text, setText] = React.useState({
-    topText: "", bottomText:""
+    topText: "", bottomText:"", randomImage:"https://i.imgflip.com/1g8my4.jpg"
   })
 
-  const [memeImage, setMemeImage] = React.useState("https://i.imgflip.com/1g8my4.jpg")
+  const [memeData, setMemeData] = React.useState({})
 
 
   function textUpdate(e){
@@ -19,25 +18,26 @@ const Meme = () => {
       }) 
     }
 
-    // React.useEffect(()=> {
-    //   fetch("./memepage.json")
-    //   .then(res => res.json())
-    //   .then(data => setMemesData(data.data.memes))
-    // })
-  
-// console.log(memesData)
- // "https://api.imgflip.com/get_memes"
+    React.useEffect(()=> {
+      fetch("https://api.imgflip.com/get_memes")
+      .then(res => res.json())
+      .then(data => setMemeData(data.data.memes))
+    }, [])
 
-console.log(testData.data.memes[1])
-console.log(findRandom())
+
 function findRandom() {
   return Math.floor(Math.random() * 99) 
 }
 
   function newMemeImage(){
-    setMemeImage(testData.data.memes[findRandom()].url)
+    setText((prev)=>{
+      return {
+      ...prev,
+      randomImage: memeData[findRandom()].url
+        }
+    })
   }
-  
+
   return (
     <main>
         <div id='form'>
@@ -64,7 +64,7 @@ function findRandom() {
         </div>
 
         <section id='meme'>
-            <img src={memeImage} width="50%" alt="placeholder"/>
+            <img src={text.randomImage} width="50%" alt="placeholder"/>
             <h2 className='meme-text top'>{text.topText}</h2>
             <h2 className='meme-text bottom'>{text.bottomText}</h2>
         </section>
