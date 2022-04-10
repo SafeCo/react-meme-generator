@@ -1,6 +1,5 @@
 import React from 'react'
-import myImage from './temp-bkg.png'
-
+import testData from './memepage.json'
 
 const Meme = () => {
   
@@ -8,8 +7,7 @@ const Meme = () => {
     topText: "", bottomText:""
   })
 
-  const [memesData, setMemesData] = React.useState([])
-
+  const [memeImage, setMemeImage] = React.useState("https://i.imgflip.com/1g8my4.jpg")
 
 
   function textUpdate(e){
@@ -21,15 +19,24 @@ const Meme = () => {
       }) 
     }
 
-    React.useEffect(()=> {
-      fetch("https://api.imgflip.com/get_memes")
-      .then(res => res.json())
-      .then(data => setMemesData(data.data.memes))
-    })
+    // React.useEffect(()=> {
+    //   fetch("./memepage.json")
+    //   .then(res => res.json())
+    //   .then(data => setMemesData(data.data.memes))
+    // })
   
 // console.log(memesData)
+ // "https://api.imgflip.com/get_memes"
 
+console.log(testData.data.memes[1])
+console.log(findRandom())
+function findRandom() {
+  return Math.floor(Math.random() * 99) 
+}
 
+  function newMemeImage(){
+    setMemeImage(testData.data.memes[findRandom()].url)
+  }
   
   return (
     <main>
@@ -53,11 +60,11 @@ const Meme = () => {
               className='form-input'
             />
           </div>
-           <button id='new-image'>Get new Image</button>
+           <button id='new-image' onClick={newMemeImage}>Get new Image</button>
         </div>
 
         <section id='meme'>
-            <img src={myImage} width="50%" alt="placeholder"/>
+            <img src={memeImage} width="50%" alt="placeholder"/>
             <h2 className='meme-text top'>{text.topText}</h2>
             <h2 className='meme-text bottom'>{text.bottomText}</h2>
         </section>
