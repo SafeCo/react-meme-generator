@@ -45,7 +45,7 @@ function findRandom() {
             <input  
               name='topText'
               type='text' 
-              placeholder="Enter Top Text Here" 
+              placeholder="Enter Top Text Here..." 
               onChange={textUpdate}
               value={text.topText}
               className='form-input'
@@ -54,7 +54,7 @@ function findRandom() {
             <input 
               name='bottomText'
               type='text' 
-              placeholder="Enter Bottom Text Here" 
+              placeholder="Enter Bottom Text Here..." 
               onChange={textUpdate}
               value={text.bottomText}
               className='form-input'
@@ -64,7 +64,7 @@ function findRandom() {
         </div>
 
         <section id='meme'>
-            <img src={text.randomImage} width="50%" alt="placeholder"/>
+            <img src={text.randomImage} width="30%" alt="placeholder"/>
             <h2 className='meme-text top'>{text.topText}</h2>
             <h2 className='meme-text bottom'>{text.bottomText}</h2>
         </section>
